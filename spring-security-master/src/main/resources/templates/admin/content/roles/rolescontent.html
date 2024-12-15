@@ -1,0 +1,48 @@
+<style>
+    .rounded-table {
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 10px; /* 전체 테이블의 모서리 */
+        overflow: hidden; /* 둥근 모서리를 위해 필요 */
+        background-color: #060C1C;
+    }
+
+    .rounded-table thead tr:first-child th:first-child {
+        border-top-left-radius: 10px; /* 첫 번째 셀의 왼쪽 상단 모서리 */
+    }
+
+    .rounded-table thead tr:first-child th:last-child {
+        border-top-right-radius: 10px; /* 마지막 셀의 오른쪽 상단 모서리 */
+    }
+
+    .rounded-table tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 10px; /* 첫 번째 셀의 왼쪽 하단 모서리 */
+    }
+
+    .rounded-table tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 10px; /* 마지막 셀의 오른쪽 하단 모서리 */
+    }
+</style>
+<div class="tbl_wrp form-custom">
+        <table class="table rounded-table">
+            <thead>
+            <tr class="table-info">
+                <th scope="col">권한명</th>
+                <th scope="col">권한설명</th>
+                <th scope="col">표현식여부</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="link_btn hover" th:each="role:${roles}">
+                <td style="text-align: left;">
+                    <a th:href="@{'/admin/roles/' + ${role.id}}" class="text-white" th:text="${role.roleName}">회원></a>
+                </td>
+                <td style="color:#ffffff" th:text="${role.roleDesc}"></td>
+                <td style="color:#ffffff" th:text="${role.isExpression}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="text-align:right;">
+            <a class="btn btn-dark btn-lg" th:href="@{/admin/roles/register}">권한 등록</a>
+        </div>
+    </div>
