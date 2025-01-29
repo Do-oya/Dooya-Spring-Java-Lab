@@ -1,0 +1,5 @@
+rootProject.name = 'MultiModule'
+
+include(
+        "hello"
+)
