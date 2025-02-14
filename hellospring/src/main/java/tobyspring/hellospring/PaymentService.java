@@ -11,6 +11,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
+import static tobyspring.hellospring.Payment.createPayment;
+
 public class PaymentService {
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
         // 환율 가져오기
@@ -22,14 +24,7 @@ public class PaymentService {
         // 유효 시간 계산
         LocalDateTime validUtil = getValidUtil();
 
-        return Payment.builder()
-                .orderId(orderId)
-                .currency(currency)
-                .foreignCurrencyAmount(foreignCurrencyAmount)
-                .exRate(exRate)
-                .convertedAmount(convertedAmount)
-                .validUntil(validUtil)
-                .build();
+        return createPayment(orderId, currency, foreignCurrencyAmount, exRate, convertedAmount, validUtil);
     }
 
     private static BigDecimal getExRate(String currency) throws IOException {

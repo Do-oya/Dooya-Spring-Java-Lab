@@ -18,4 +18,15 @@ public class Payment {
     private BigDecimal exRate;
     private BigDecimal convertedAmount;
     private LocalDateTime validUntil;
+
+    public static Payment createPayment(Long orderId, String currency, BigDecimal foreignCurrencyAmount, BigDecimal exRate, BigDecimal convertedAmount, LocalDateTime validUtil) {
+        return Payment.builder()
+                .orderId(orderId)
+                .currency(currency)
+                .foreignCurrencyAmount(foreignCurrencyAmount)
+                .exRate(exRate)
+                .convertedAmount(convertedAmount)
+                .validUntil(validUtil)
+                .build();
+    }
 }
