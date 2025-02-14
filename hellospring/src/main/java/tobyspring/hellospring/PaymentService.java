@@ -15,14 +15,9 @@ import static tobyspring.hellospring.Payment.createPayment;
 
 public class PaymentService {
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
-        // 환율 가져오기
         BigDecimal exRate = getExRate(currency);
-
-        // 금액 계산
-        BigDecimal convertedAmount = getConvertedAmount(foreignCurrencyAmount, exRate);
-
-        // 유효 시간 계산
-        LocalDateTime validUtil = getValidUtil();
+        BigDecimal convertedAmount = foreignCurrencyAmount.multiply(exRate);
+        LocalDateTime validUtil = LocalDateTime.now().plusMinutes(30);
 
         return createPayment(orderId, currency, foreignCurrencyAmount, exRate, convertedAmount, validUtil);
     }
@@ -37,13 +32,5 @@ public class PaymentService {
         ObjectMapper mapper = new ObjectMapper();
         ExRateData data = mapper.readValue(response, ExRateData.class);
         return data.rates().get("KRW");
-    }
-
-    private static BigDecimal getConvertedAmount(BigDecimal foreignCurrencyAmount, BigDecimal exRate) {
-        return foreignCurrencyAmount.multiply(exRate);
-    }
-
-    private static LocalDateTime getValidUtil() {
-        return LocalDateTime.now().plusMinutes(30);
     }
 }
