@@ -1,6 +1,7 @@
-package tobyspring.hellospring;
+package tobyspring.hellospring.exrate;
 
 import lombok.RequiredArgsConstructor;
+import tobyspring.hellospring.payment.ExRateProvider;
 
 import java.io.IOException;
 import java.math.BigDecimal;

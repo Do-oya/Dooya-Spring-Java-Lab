@@ -1,6 +1,5 @@
-package tobyspring.hellospring;
+package tobyspring.hellospring.payment;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
