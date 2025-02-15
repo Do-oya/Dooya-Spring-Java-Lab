@@ -9,8 +9,8 @@ import static tobyspring.hellospring.Payment.createPayment;
 public class PaymentService {
     private final ExRateProvider exRateProvider;
 
-    public PaymentService() {
-        this.exRateProvider = new WebApiExRateProvider();
+    public PaymentService(ExRateProvider exRateProvider) {
+        this.exRateProvider = exRateProvider;
     }
 
     public Payment prepare(Long orderId, String currency, BigDecimal foreignCurrencyAmount) throws IOException {
