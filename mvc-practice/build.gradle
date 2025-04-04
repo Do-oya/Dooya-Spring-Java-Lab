@@ -14,6 +14,9 @@ dependencies {
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:8.5.42'
 
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'javax.servlet:jstl:1.2'
+
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
