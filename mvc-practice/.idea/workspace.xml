@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e9aeb98-ebbe-49ab-992e-151cd60f5040" name="Changes" comment="jsp log 의존성 추가">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/WebApplicationServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/WebApplicationServer.java" afterDir="false" />
-    </list>
+    <list default="true" id="9e9aeb98-ebbe-49ab-992e-151cd60f5040" name="Changes" comment="tomcap으로 서버 실행 코드 작성" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743677418005</updated>
-      <workItem from="1743677419108" duration="5727000" />
+      <workItem from="1743677419108" duration="5745000" />
     </task>
     <task id="LOCAL-00001" summary="웹 프로젝트 환경 구성">
       <option name="closed" value="true" />
@@ -130,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743738638602</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="tomcap으로 서버 실행 코드 작성">
+      <option name="closed" value="true" />
+      <created>1743755636941</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1743755636941</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,6 +147,7 @@
     <MESSAGE value="메인 메서드 이름 변경 및 tomcat 의존성 추가" />
     <MESSAGE value="servlet 의존성 추가" />
     <MESSAGE value="jsp log 의존성 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="jsp log 의존성 추가" />
+    <MESSAGE value="tomcap으로 서버 실행 코드 작성" />
+    <option name="LAST_COMMIT_MESSAGE" value="tomcap으로 서버 실행 코드 작성" />
   </component>
 </project>
