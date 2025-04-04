@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e9aeb98-ebbe-49ab-992e-151cd60f5040" name="Changes" comment="웹 프로젝트 환경 구성">
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/WebApplicationServer.java" afterDir="false" />
+    <list default="true" id="9e9aeb98-ebbe-49ab-992e-151cd60f5040" name="Changes" comment="jsp log 의존성 추가">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/WebApplicationServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/WebApplicationServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +43,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Gradle.mvc-practice [:org.example.Main.main()].executor": "Run",
+    "Gradle.mvc-practice [:org.example.WebApplicationServer.main()].executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
@@ -53,6 +53,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
@@ -93,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743677418005</updated>
-      <workItem from="1743677419108" duration="3511000" />
+      <workItem from="1743677419108" duration="5727000" />
     </task>
     <task id="LOCAL-00001" summary="웹 프로젝트 환경 구성">
       <option name="closed" value="true" />
@@ -103,7 +106,31 @@
       <option name="project" value="LOCAL" />
       <updated>1743677476241</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="메인 메서드 이름 변경 및 tomcat 의존성 추가">
+      <option name="closed" value="true" />
+      <created>1743738500976</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1743738500976</updated>
+    </task>
+    <task id="LOCAL-00003" summary="servlet 의존성 추가">
+      <option name="closed" value="true" />
+      <created>1743738557174</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1743738557174</updated>
+    </task>
+    <task id="LOCAL-00004" summary="jsp log 의존성 추가">
+      <option name="closed" value="true" />
+      <created>1743738638602</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1743738638602</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +138,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="웹 프로젝트 환경 구성" />
-    <option name="LAST_COMMIT_MESSAGE" value="웹 프로젝트 환경 구성" />
+    <MESSAGE value="메인 메서드 이름 변경 및 tomcat 의존성 추가" />
+    <MESSAGE value="servlet 의존성 추가" />
+    <MESSAGE value="jsp log 의존성 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="jsp log 의존성 추가" />
   </component>
 </project>
