@@ -1,4 +1,4 @@
-package org.example;
+package org.example._ch03_1;
 
 import org.passay.CharacterData;
 import org.passay.CharacterRule;

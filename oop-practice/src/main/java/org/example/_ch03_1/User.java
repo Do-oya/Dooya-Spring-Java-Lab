@@ -1,4 +1,4 @@
-package org.example;
+package org.example._ch03_1;
 
 public class User {
     private String password;
