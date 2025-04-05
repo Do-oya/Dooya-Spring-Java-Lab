@@ -1,18 +1,20 @@
 package org.example.user.domain;
 
+import org.example.common.domain.PositiveIntegerCounter;
+
 import java.util.Objects;
 
 public class User {
     private final Long id;
     private final UserInfo info;
-    private final UserRelationCounter followingCounter;
-    private final UserRelationCounter followerCounter;
+    private final PositiveIntegerCounter followingCounter;
+    private final PositiveIntegerCounter followerCounter;
 
     public User(Long id, UserInfo info) {
         this.id = id;
         this.info = info;
-        this.followingCounter = new UserRelationCounter();
-        this.followerCounter = new UserRelationCounter();
+        this.followingCounter = new PositiveIntegerCounter();
+        this.followerCounter = new PositiveIntegerCounter();
     }
 
     public void follow(User targetUser) {
@@ -51,5 +53,9 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public Long getId() {
+        return id;
     }
 }
