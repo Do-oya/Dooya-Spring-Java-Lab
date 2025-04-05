@@ -1,10 +1,6 @@
-package org.example._ch_03_3;
+package org.example._ch03_3;
 
-import org.assertj.core.util.Streams;
-import org.example._ch03_3.Calculator;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
