@@ -5,13 +5,13 @@ import java.util.Objects;
 public class User {
     private final Long id;
     private final UserInfo info;
-    private final UserRelationCounter follwingCounter;
+    private final UserRelationCounter followingCounter;
     private final UserRelationCounter followerCounter;
 
     public User(Long id, UserInfo info) {
         this.id = id;
         this.info = info;
-        this.follwingCounter = new UserRelationCounter();
+        this.followingCounter = new UserRelationCounter();
         this.followerCounter = new UserRelationCounter();
     }
 
@@ -20,7 +20,7 @@ public class User {
             throw new IllegalArgumentException();
         }
 
-        follwingCounter.increase();
+        followingCounter.increase();
         targetUser.increaseFollowerCount();
     }
 
@@ -29,16 +29,16 @@ public class User {
             throw new IllegalArgumentException();
         }
 
-        follwingCounter.decrease();
+        followingCounter.decrease();
         targetUser.decreaseFollowerCount();
     }
 
     private void increaseFollowerCount() {
-        follwingCounter.increase();
+        followingCounter.increase();
     }
 
     private void decreaseFollowerCount() {
-        follwingCounter.decrease();
+        followingCounter.decrease();
     }
 
     @Override
