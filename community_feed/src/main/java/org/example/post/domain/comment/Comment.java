@@ -47,7 +47,6 @@ public class Comment {
         if (!this.author.equals(user)) {
             throw new IllegalArgumentException();
         }
-
         this.content.updateContent(updateContent);
     }
 }
