@@ -5,6 +5,9 @@ public class PasswordMeter {
         if (password == null) {
             return PasswordStrength.INVALID;
         }
+        if (password.isEmpty()) {
+            return PasswordStrength.INVALID;
+        }
         return PasswordStrength.STRONG;
     }
 }
