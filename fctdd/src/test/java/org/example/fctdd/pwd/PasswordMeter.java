@@ -11,6 +11,11 @@ public class PasswordMeter {
         if (password.length() < 8) {
             return PasswordStrength.NORMAL;
         }
+        Pattern pattern = Pattern.compile("[0-9]");
+        Matcher matcher = pattern.matcher(password);
+        if (!matcher.find()) {
+            return PasswordStrength.NORMAL;
+        }
         return PasswordStrength.STRONG;
     }
 }
