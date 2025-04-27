@@ -43,4 +43,11 @@ public class PasswordMeterTest {
                 "12ABabc",
                 PasswordStrength.NORMAL);
     }
+
+    @Test
+    void meet2RulesExceptionForDigitRule() {
+        assertPasswordStrength(
+                "abcdABabc",
+                PasswordStrength.NORMAL);
+    }
 }
