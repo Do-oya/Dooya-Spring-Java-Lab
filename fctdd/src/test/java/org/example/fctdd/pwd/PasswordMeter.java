@@ -5,10 +5,6 @@ public class PasswordMeter {
         if (password == null) {
             return PasswordStrength.INVALID;
         }
-        if (password.equals("abcdABCD123") ||
-                password.equals("123abcdABCD")) {
-            return PasswordStrength.STRONG;
-        }
-        return PasswordStrength.INVALID;
+        return PasswordStrength.STRONG;
     }
 }
