@@ -33,4 +33,11 @@ public class PasswordMeterTest {
                 "ABCD1234abc",
                 PasswordStrength.STRONG);
     }
+
+    @Test
+    void meet2RulesExceptForLengthRule() {
+        assertPasswordStrength(
+                "abc12AB",
+                PasswordStrength.NORMAL);
+    }
 }
