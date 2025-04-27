@@ -8,6 +8,9 @@ public class PasswordMeter {
         if (password.isEmpty()) {
             return PasswordStrength.INVALID;
         }
+        if (password.length() < 8) {
+            return PasswordStrength.NORMAL;
+        }
         return PasswordStrength.STRONG;
     }
 }
