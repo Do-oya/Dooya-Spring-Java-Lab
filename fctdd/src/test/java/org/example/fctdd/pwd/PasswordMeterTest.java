@@ -7,22 +7,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PasswordMeterTest {
     @Test
     void nullInput() {
+        assertPasswordStrength(null, PasswordStrength.INVALID);
+    }
+
+    private static void assertPasswordStrength(String password, PasswordStrength expected) {
         PasswordMeter meter = new PasswordMeter();
-        PasswordStrength result = meter.meter(null);
-        assertThat(result).isEqualTo(PasswordStrength.INVALID);
+        PasswordStrength result = meter.meter(password);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
     void emptyInput() {
-        PasswordMeter meter = new PasswordMeter();
-        PasswordStrength result = meter.meter("");
-        assertThat(result).isEqualTo(PasswordStrength.INVALID);
+        assertPasswordStrength("", PasswordStrength.INVALID);
     }
 
     @Test
     void meetAllRules() {
-        PasswordMeter meter = new PasswordMeter();
-        PasswordStrength result = meter.meter("abcdABCD123");
-        assertThat(result).isEqualTo(PasswordStrength.STRONG);
+        assertPasswordStrength("abcdABCD123", PasswordStrength.STRONG);
     }
 }
