@@ -18,11 +18,21 @@ public class PasswordMeter {
         if (!containsDigit) {
             return PasswordStrength.NORMAL;
         }
+        boolean containsUppercase = containsUppercase(password);
+        if (!containsUppercase) {
+            return PasswordStrength.NORMAL;
+        }
         return PasswordStrength.STRONG;
     }
 
     private static boolean containsDigit(String password) {
         Pattern pattern = Pattern.compile("[0-9]");
+        Matcher matcher = pattern.matcher(password);
+        return matcher.find();
+    }
+
+    private static boolean containsUppercase(String password) {
+        Pattern pattern = Pattern.compile("[A-Z]");
         Matcher matcher = pattern.matcher(password);
         return matcher.find();
     }
