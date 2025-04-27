@@ -50,4 +50,11 @@ public class PasswordMeterTest {
                 "abcdABabc",
                 PasswordStrength.NORMAL);
     }
+
+    @Test
+    void meet2RulesExceptForUppercaseRule() {
+        assertPasswordStrength(
+                "abcde1234",
+                PasswordStrength.NORMAL);
+    }
 }
