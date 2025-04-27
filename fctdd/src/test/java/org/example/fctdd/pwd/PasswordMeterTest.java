@@ -18,4 +18,11 @@ public class PasswordMeterTest {
         PasswordStrength result = meter.meter("");
         assertThat(result).isEqualTo(PasswordStrength.INVALID);
     }
+
+    @Test
+    void meetAllRules() {
+        PasswordMeter meter = new PasswordMeter();
+        PasswordStrength result = meter.meter("abcdABCD123");
+        assertThat(result).isEqualTo(PasswordStrength.STRONG);
+    }
 }
