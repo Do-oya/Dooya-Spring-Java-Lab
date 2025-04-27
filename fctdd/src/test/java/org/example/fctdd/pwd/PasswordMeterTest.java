@@ -11,4 +11,11 @@ public class PasswordMeterTest {
         PasswordStrength result = meter.meter(null);
         assertThat(result).isEqualTo(PasswordStrength.INVALID);
     }
+
+    @Test
+    void emptyInput() {
+        PasswordMeter meter = new PasswordMeter();
+        PasswordStrength result = meter.meter("");
+        assertThat(result).isEqualTo(PasswordStrength.INVALID);
+    }
 }
