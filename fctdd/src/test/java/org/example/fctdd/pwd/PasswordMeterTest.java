@@ -64,4 +64,25 @@ public class PasswordMeterTest {
                 "abcdefghwiehf",
                 PasswordStrength.WEAK);
     }
+
+    @Test
+    void meetOnlyDigitRule() {
+        assertPasswordStrength(
+                "abc123",
+                PasswordStrength.WEAK);
+    }
+
+    @Test
+    void meetOnlyUppercaseRule() {
+        assertPasswordStrength(
+                "abcABC",
+                PasswordStrength.WEAK);
+    }
+
+    @Test
+    void noRules() {
+        assertPasswordStrength(
+                "abcwef",
+                PasswordStrength.WEAK);
+    }
 }

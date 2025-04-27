@@ -11,15 +11,17 @@ public class PasswordMeter {
         if (password.isEmpty()) {
             return PasswordStrength.INVALID;
         }
-        if (password.length() < 8) {
-            return PasswordStrength.NORMAL;
+        int metCount = 0;
+        if (containsDigit(password)) metCount++;
+        if (containsUppercase(password)) metCount++;
+        if (password.length() >= 8) metCount++;
+        if (metCount == 0) {
+            return PasswordStrength.WEAK;
         }
-        boolean containsDigit = containsDigit(password);
-        if (!containsDigit) {
-            return PasswordStrength.NORMAL;
+        if (metCount == 1) {
+            return PasswordStrength.WEAK;
         }
-        boolean containsUppercase = containsUppercase(password);
-        if (!containsUppercase) {
+        if (metCount == 2) {
             return PasswordStrength.NORMAL;
         }
         return PasswordStrength.STRONG;
