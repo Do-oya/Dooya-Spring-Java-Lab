@@ -23,6 +23,11 @@ public class PasswordMeterTest {
 
     @Test
     void meetAllRules() {
-        assertPasswordStrength("abcdABCD123", PasswordStrength.STRONG);
+        assertPasswordStrength(
+                "abcdABCD123",
+                PasswordStrength.STRONG);
+        assertPasswordStrength(
+                "123abcdABCD",
+                PasswordStrength.STRONG);
     }
 }
