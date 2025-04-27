@@ -39,5 +39,8 @@ public class PasswordMeterTest {
         assertPasswordStrength(
                 "abc12AB",
                 PasswordStrength.NORMAL);
+        assertPasswordStrength(
+                "12ABabc",
+                PasswordStrength.NORMAL);
     }
 }
