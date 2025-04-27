@@ -1,5 +1,5 @@
 package org.example.fctdd.pwd;
 
 public enum PasswordStrength {
-    STRONG, NORMAL, INVALID
+    STRONG, NORMAL, WEAK, INVALID
 }

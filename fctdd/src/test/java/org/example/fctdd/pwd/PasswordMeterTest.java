@@ -57,4 +57,11 @@ public class PasswordMeterTest {
                 "abcde1234",
                 PasswordStrength.NORMAL);
     }
+
+    @Test
+    void meetOnlyLengthRule() {
+        assertPasswordStrength(
+                "abcdefghwiehf",
+                PasswordStrength.WEAK);
+    }
 }
