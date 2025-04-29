@@ -22,7 +22,7 @@ public class UserServiceTest {
     @Mock
     private UserJpaRepository userJpaRepository;
 
-    @DisplayName("회원 가입 테스트")
+    @DisplayName("회원 성공 가입 테스트")
     @Test
     void signupTest() {
         // given
