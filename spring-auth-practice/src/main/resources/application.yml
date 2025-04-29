@@ -10,3 +10,11 @@ spring:
       ddl-auto: create
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+jwt:
+  secret-key: "ThisIsAReallyStrongSecretKeyWithMoreThan32Bytes!"
+  valid-time: 3600000
+
+cookie:
+  valid-time: 3600000
+  name: "Authorization"

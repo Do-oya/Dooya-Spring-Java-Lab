@@ -1,6 +1,6 @@
 package org.example.springauthpractice.auth.application;
 
-import org.example.springauthpractice.auth.presentation.LoginResponse;
+import org.example.springauthpractice.auth.util.JwtUtil;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.domain.UserRepository;
 import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
@@ -20,6 +20,9 @@ public class AuthServiceTest {
     @Mock
     private UserJpaRepository userJpaRepository;
 
+    @Mock
+    private JwtUtil jwtUtil;
+
     @DisplayName("로그인 성공 테스트")
     @Test
     void loginTest() {
@@ -28,7 +31,7 @@ public class AuthServiceTest {
         given(userJpaRepository.findByName(mockUser.getName())).willReturn(mockUser);
 
         UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);
-        AuthService authService = new AuthServiceImpl(userRepository);
+        AuthService authService = new AuthServiceImpl(userRepository, jwtUtil);
 
         LoginRequest request = new LoginRequest("testId", "testPassword");
 

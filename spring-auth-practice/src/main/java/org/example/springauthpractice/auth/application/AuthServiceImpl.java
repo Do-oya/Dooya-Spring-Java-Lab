@@ -2,7 +2,7 @@ package org.example.springauthpractice.auth.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.springauthpractice.auth.presentation.LoginResponse;
+import org.example.springauthpractice.auth.util.JwtUtil;
 import org.example.springauthpractice.common.exception.CustomException;
 import org.example.springauthpractice.common.exception.ErrorCode;
 import org.example.springauthpractice.user.domain.User;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
     @Transactional
     @Override
@@ -21,10 +22,10 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByName(request.name())
                 .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_MATCH_LOGIN_INFO));
 
-//        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getName(), user.getPassword());
+        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getName());
 
         return LoginResponse.builder()
-//                .accessToken(accessToken)
+                .accessToken(accessToken)
                 .id(user.getId())
                 .name(user.getName())
                 .password(user.getPassword())

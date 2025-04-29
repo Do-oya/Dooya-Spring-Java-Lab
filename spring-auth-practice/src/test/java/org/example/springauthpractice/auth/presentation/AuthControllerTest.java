@@ -14,7 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -47,6 +49,37 @@ public class AuthControllerTest {
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").exists())
+                .andExpect(result -> {
+                    String cookie = result.getResponse().getHeader("Set-Cookie");
+                    assertThat(cookie).contains("Authorization");
+                });
+    }
+
+    @DisplayName("로그인 실패 - 이름 공란")
+    @Test
+    void userLogin_fail_noName() throws Exception {
+        // given
+        LoginRequest request = new LoginRequest("", "testPassword");
+
+        // when && then
+        mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @DisplayName("로그인 실패 - 비밀번호 공란")
+    @Test
+    void userLogin_fail_noPassword() throws Exception {
+        // given
+        LoginRequest request = new LoginRequest("testId", "");
+
+        // when && then
+        mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
     }
 }

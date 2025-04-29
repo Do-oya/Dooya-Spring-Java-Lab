@@ -1,4 +1,4 @@
-package org.example.springauthpractice.auth.presentation;
+package org.example.springauthpractice.auth.application;
 
 import lombok.Builder;
 
