@@ -1,7 +1,9 @@
 package org.example.springauthpractice.user.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.bytebuddy.build.ToStringPlugin;
 import org.example.springauthpractice.user.application.UserSignupRequest;
+import org.example.springauthpractice.user.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +40,37 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.password").value(request.password()));
     }
 
-    @DisplayName("유저 회원가입 실패")
+    @DisplayName("유저 회원가입 실패 - 이름이 공란일때")
     @Test
-    void userSingUp_fail() throws Exception {
+    void userSingUp_fail_noName() throws Exception {
+        // given
+        UserSignupRequest request = new UserSignupRequest("", "testPassword");
+
+        // when && then
+        mockMvc.perform(post("/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(false))
+                .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(jsonPath("$.validationErrors[0].field").value("name"))
+                .andExpect(jsonPath("$.validationErrors[0].message").value("이름은 비어 있을 수 없습니다"));
     }
 
+    @DisplayName("유저 회원가입 실패 - 비밀번호가 공란일때")
+    @Test
+    void userSingUp_fail_noPassword() throws Exception {
+        // given
+        UserSignupRequest request = new UserSignupRequest("testId", "");
+
+        // when && then
+        mockMvc.perform(post("/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(false))
+                .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(jsonPath("$.validationErrors[0].field").value("password"))
+                .andExpect(jsonPath("$.validationErrors[0].message").value("비밀번호는 비어 있을 수 없습니다"));
+    }
 }

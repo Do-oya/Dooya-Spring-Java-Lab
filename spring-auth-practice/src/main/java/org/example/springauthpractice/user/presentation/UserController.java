@@ -1,5 +1,6 @@
 package org.example.springauthpractice.user.presentation;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.springauthpractice.user.application.UserService;
 import org.example.springauthpractice.user.application.UserSignupRequest;
@@ -19,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<UserSignupResponse> signup(@RequestBody UserSignupRequest request) {
+    public ResponseEntity<UserSignupResponse> signup(@Valid @RequestBody UserSignupRequest request) {
         User user = userService.signupUser(request);
         UserSignupResponse response = new UserSignupResponse(user.getName(), user.getPassword());
         return ResponseEntity.ok(response);
