@@ -1,9 +1,7 @@
 package org.example.springauthpractice.user.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.bytebuddy.build.ToStringPlugin;
 import org.example.springauthpractice.user.application.UserSignupRequest;
-import org.example.springauthpractice.user.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
