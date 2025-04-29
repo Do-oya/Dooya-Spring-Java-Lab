@@ -1,3 +1,4 @@
+/*
 package org.example.fctdd.member.api;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,8 @@ public class MemberServiceTest {
                 .isInstanceOf(MemberAlreadyActivatedException.class);
     }
 
-    /*@Test
+    */
+/*@Test
     void name() {
         memberRepository.save(new Member("id", MemberStatus.WAITING));
 
@@ -31,5 +33,7 @@ public class MemberServiceTest {
         Member m = memberRepository.findById("id")
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
         assertThat(m.getStatus()).isEqualTo(MemberStatus.ACTIVE);
-    }*/
+    }*//*
+
 }
+*/

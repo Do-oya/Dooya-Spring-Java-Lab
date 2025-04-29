@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,5 +28,12 @@ public class MemberApiTest {
         BDDMockito.then(confirmMemberService)
                 .should()
                 .confirm("id");
+    }
+
+    @Test
+    void test() {
+        int a = 1;
+        int b = 2;
+        assertThat(3).isEqualTo(a + b);
     }
 }
