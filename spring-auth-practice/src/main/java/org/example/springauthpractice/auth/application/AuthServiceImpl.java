@@ -22,7 +22,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByName(request.name())
                 .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_MATCH_LOGIN_INFO));
 
-        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getName());
+        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getName(), user.getRole());
 
         return LoginResponse.builder()
                 .accessToken(accessToken)

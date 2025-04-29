@@ -1,6 +1,7 @@
 package org.example.springauthpractice.auth.application;
 
 import org.example.springauthpractice.auth.util.JwtUtil;
+import org.example.springauthpractice.user.domain.Role;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.domain.UserRepository;
 import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
@@ -27,7 +28,7 @@ public class AuthServiceTest {
     @Test
     void loginTest() {
         // given
-        User mockUser = new User(1L, "testId", "testPassword");
+        User mockUser = new User(1L, "testId", "testPassword", Role.USER);
         given(userJpaRepository.findByName(mockUser.getName())).willReturn(mockUser);
 
         UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);

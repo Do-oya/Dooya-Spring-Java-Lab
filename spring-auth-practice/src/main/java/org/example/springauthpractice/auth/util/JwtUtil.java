@@ -5,6 +5,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.example.springauthpractice.common.exception.CustomException;
 import org.example.springauthpractice.common.exception.ErrorCode;
+import org.example.springauthpractice.user.domain.Role;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -28,13 +29,14 @@ public class JwtUtil {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createAccessToken(Long userId, String name) {
+    public String createAccessToken(Long userId, String name, Role role) {
         Date timeNow = new Date(System.currentTimeMillis());
         Date expirationTime = new Date(timeNow.getTime() + TOKEN_VALID_TIME);
 
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("name", name)
+                .claim("role", role.getRoleSecurity())
                 .setIssuedAt(timeNow)
                 .setExpiration(expirationTime)
                 .signWith(secretKey)
@@ -49,6 +51,11 @@ public class JwtUtil {
     public String getUsername(String token) {
         return Jwts.parserBuilder().setSigningKey(secretKey).build()
                 .parseClaimsJws(token).getBody().get("name", String.class);
+    }
+
+    public String getRole(String token) {
+        return Jwts.parserBuilder().setSigningKey(secretKey).build()
+                .parseClaimsJws(token).getBody().get("role", String.class);
     }
 
     public boolean validateToken(String token) {

@@ -17,10 +17,14 @@ public class User {
     private String name;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public static User signup(String name, String password) {
         return User.builder()
                 .name(name)
                 .password(password)
+                .role(Role.USER)
                 .build();
     }
 }

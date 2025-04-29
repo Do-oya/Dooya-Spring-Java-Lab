@@ -2,6 +2,7 @@ package org.example.springauthpractice.auth.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.springauthpractice.auth.application.LoginRequest;
+import org.example.springauthpractice.user.domain.Role;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ public class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
-        User mockUser = new User(null, "testId", "testPassword");
+        User mockUser = new User(null, "testId", "testPassword", Role.USER);
         userJpaRepository.save(mockUser);
     }
 
@@ -67,7 +68,11 @@ public class AuthControllerTest {
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(false))
+                .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(jsonPath("$.validationErrors[0].field").value("name"))
+                .andExpect(jsonPath("$.validationErrors[0].message").value("이름은 비어 있을 수 없습니다"));
     }
 
     @DisplayName("로그인 실패 - 비밀번호 공란")
@@ -80,6 +85,10 @@ public class AuthControllerTest {
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(false))
+                .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(jsonPath("$.validationErrors[0].field").value("password"))
+                .andExpect(jsonPath("$.validationErrors[0].message").value("비밀번호는 비어 있을 수 없습니다"));
     }
 }

@@ -1,5 +1,6 @@
 package org.example.springauthpractice.user.application;
 
+import org.example.springauthpractice.user.domain.Role;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.domain.UserRepository;
 import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
@@ -30,7 +31,7 @@ public class UserServiceTest {
         UserService userService = new UserServiceImpl(userRepository);
 
         UserSignupRequest request = new UserSignupRequest("testId", "testPassword");
-        User mockUser = new User(1L, "testId", "testPassword");
+        User mockUser = new User(1L, "testId", "testPassword", Role.USER);
 
         given(userJpaRepository.save(any(User.class))).willReturn(mockUser);
 
