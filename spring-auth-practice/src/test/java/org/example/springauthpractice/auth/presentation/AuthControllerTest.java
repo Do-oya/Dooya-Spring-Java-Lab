@@ -58,9 +58,9 @@ public class AuthControllerTest {
                 });
     }
 
-    @DisplayName("로그인 실패 - 이름 공란")
+    @DisplayName("로그인 실패 - 이메일 공란")
     @Test
-    void userLogin_fail_noName() throws Exception {
+    void userLogin_fail_noEmail() throws Exception {
         // given
         LoginRequest request = new LoginRequest("", "testPassword");
 
