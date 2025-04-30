@@ -19,14 +19,15 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     @Override
     public LoginResponse login(LoginRequest request) {
-        User user = userRepository.findByName(request.name())
+        User user = userRepository.findByEmail(request.email())
                 .orElseThrow(()-> new CustomException(ErrorCode.USER_NOT_MATCH_LOGIN_INFO));
 
-        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getName(), user.getRole());
+        String accessToken = jwtUtil.createAccessToken(user.getId(), user.getEmail(), user.getRole());
 
         return LoginResponse.builder()
                 .accessToken(accessToken)
                 .id(user.getId())
+                .email(user.getEmail())
                 .name(user.getName())
                 .password(user.getPassword())
                 .build();

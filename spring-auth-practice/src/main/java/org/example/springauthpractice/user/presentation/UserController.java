@@ -22,7 +22,7 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<UserSignupResponse> signup(@Valid @RequestBody UserSignupRequest request) {
         User user = userService.signupUser(request);
-        UserSignupResponse response = new UserSignupResponse(user.getName(), user.getPassword());
+        UserSignupResponse response = new UserSignupResponse(user.getEmail(), user.getName(), user.getPassword());
         return ResponseEntity.ok(response);
     }
 }

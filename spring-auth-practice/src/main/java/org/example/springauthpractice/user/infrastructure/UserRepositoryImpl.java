@@ -19,7 +19,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findByName(String name) {
-        return Optional.ofNullable(userJpaRepository.findByName(name));
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(userJpaRepository.findByEmail(email));
     }
 }

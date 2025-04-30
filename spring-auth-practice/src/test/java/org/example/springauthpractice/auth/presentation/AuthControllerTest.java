@@ -36,7 +36,7 @@ public class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
-        User mockUser = new User(null, "testId", "testPassword", Role.USER);
+        User mockUser = new User(null, "testEmail", "testId", "testPassword", Role.USER);
         userJpaRepository.save(mockUser);
     }
 
@@ -44,7 +44,7 @@ public class AuthControllerTest {
     @Test
     void userLogin_success() throws Exception {
         // given
-        LoginRequest request = new LoginRequest("testId", "testPassword");
+        LoginRequest request = new LoginRequest("testEmail", "testPassword");
 
         // when && then
         mockMvc.perform(post("/auth/login")
@@ -71,8 +71,8 @@ public class AuthControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.status").value(false))
                 .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
-                .andExpect(jsonPath("$.validationErrors[0].field").value("name"))
-                .andExpect(jsonPath("$.validationErrors[0].message").value("이름은 비어 있을 수 없습니다"));
+                .andExpect(jsonPath("$.validationErrors[0].field").value("email"))
+                .andExpect(jsonPath("$.validationErrors[0].message").value("이메일은 비어 있을 수 없습니다"));
     }
 
     @DisplayName("로그인 실패 - 비밀번호 공란")

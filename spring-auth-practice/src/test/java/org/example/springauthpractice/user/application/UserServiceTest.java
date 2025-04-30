@@ -30,8 +30,8 @@ public class UserServiceTest {
         UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);
         UserService userService = new UserServiceImpl(userRepository);
 
-        UserSignupRequest request = new UserSignupRequest("testId", "testPassword");
-        User mockUser = new User(1L, "testId", "testPassword", Role.USER);
+        UserSignupRequest request = new UserSignupRequest("testEmail", "testId", "testPassword");
+        User mockUser = new User(1L, "testEmail", "testId", "testPassword", Role.USER);
 
         given(userJpaRepository.save(any(User.class))).willReturn(mockUser);
 

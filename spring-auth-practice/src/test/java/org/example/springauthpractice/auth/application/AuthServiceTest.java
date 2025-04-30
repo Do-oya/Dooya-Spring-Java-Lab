@@ -28,8 +28,8 @@ public class AuthServiceTest {
     @Test
     void loginTest() {
         // given
-        User mockUser = new User(1L, "testId", "testPassword", Role.USER);
-        given(userJpaRepository.findByName(mockUser.getName())).willReturn(mockUser);
+        User mockUser = new User(1L, "testEmail", "testId", "testPassword", Role.USER);
+        given(userJpaRepository.findByEmail(mockUser.getEmail())).willReturn(mockUser);
 
         UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);
         AuthService authService = new AuthServiceImpl(userRepository, jwtUtil);
@@ -40,7 +40,7 @@ public class AuthServiceTest {
         LoginResponse response = authService.login(request);
 
         // then
-        assertThat(mockUser.getName()).isEqualTo(response.name());
-        then(userJpaRepository).should(times(1)).findByName(mockUser.getName());
+        assertThat(mockUser.getEmail()).isEqualTo(response.email());
+        then(userJpaRepository).should(times(1)).findByEmail(mockUser.getEmail());
     }
 }

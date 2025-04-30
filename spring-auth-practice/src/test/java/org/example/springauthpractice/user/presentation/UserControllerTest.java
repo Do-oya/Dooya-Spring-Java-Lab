@@ -28,22 +28,40 @@ public class UserControllerTest {
     @Test
     void userSingUp_success() throws Exception {
         // given
-        UserSignupRequest request = new UserSignupRequest("testId", "testPassword");
+        UserSignupRequest request = new UserSignupRequest("testEmail", "testId", "testPassword");
 
         // when && then
         mockMvc.perform(post("/users/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value(request.email()))
                 .andExpect(jsonPath("$.name").value(request.name()))
                 .andExpect(jsonPath("$.password").value(request.password()));
     }
 
+    @DisplayName("유저 회원가입 실패 - 이메일이 공란일때")
+    @Test
+    void userSingUp_fail_noEmail() throws Exception {
+        // given
+        UserSignupRequest request = new UserSignupRequest("", "testId", "testPassword");
+
+        // when && then
+        mockMvc.perform(post("/users/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(false))
+                .andExpect(jsonPath("$.message").value("잘못된 요청입니다."))
+                .andExpect(jsonPath("$.validationErrors[0].field").value("email"))
+                .andExpect(jsonPath("$.validationErrors[0].message").value("이메일은 비어 있을 수 없습니다"));
+    }
+
     @DisplayName("유저 회원가입 실패 - 이름이 공란일때")
     @Test
-    void userSingUp_fail_noName() throws Exception {
+    void userSingUp_fail_noUser() throws Exception {
         // given
-        UserSignupRequest request = new UserSignupRequest("", "testPassword");
+        UserSignupRequest request = new UserSignupRequest("testEmail", "", "testPassword");
 
         // when && then
         mockMvc.perform(post("/users/signup")
@@ -60,7 +78,7 @@ public class UserControllerTest {
     @Test
     void userSingUp_fail_noPassword() throws Exception {
         // given
-        UserSignupRequest request = new UserSignupRequest("testId", "");
+        UserSignupRequest request = new UserSignupRequest("testEmail", "testId", "");
 
         // when && then
         mockMvc.perform(post("/users/signup")

@@ -15,6 +15,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User signupUser(UserSignupRequest request) {
-        return userRepository.save(User.signup(request.name(), request.password()));
+        return userRepository.save(User.signup(request));
     }
 }
