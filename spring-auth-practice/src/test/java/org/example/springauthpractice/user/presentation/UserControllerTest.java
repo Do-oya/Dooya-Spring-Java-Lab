@@ -36,8 +36,7 @@ public class UserControllerTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value(request.email()))
-                .andExpect(jsonPath("$.name").value(request.name()))
-                .andExpect(jsonPath("$.password").value(request.password()));
+                .andExpect(jsonPath("$.name").value(request.name()));
     }
 
     @DisplayName("유저 회원가입 실패 - 이메일이 공란일때")

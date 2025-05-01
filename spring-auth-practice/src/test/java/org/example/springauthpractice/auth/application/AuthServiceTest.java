@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.*;
@@ -28,11 +30,18 @@ public class AuthServiceTest {
     @Test
     void loginTest() {
         // given
-        User mockUser = new User(1L, "testEmail", "testId", "testPassword", Role.USER);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User mockUser = User.builder()
+                .id(1L)
+                .email("testEmail")
+                .name("testName")
+                .password(passwordEncoder.encode("testPassword"))
+                .role(Role.USER)
+                .build();
         given(userJpaRepository.findByEmail(mockUser.getEmail())).willReturn(mockUser);
 
         UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);
-        AuthService authService = new AuthServiceImpl(userRepository, jwtUtil);
+        AuthService authService = new AuthServiceImpl(userRepository, jwtUtil, passwordEncoder);
 
         LoginRequest request = new LoginRequest("testEmail", "testPassword");
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,9 +35,19 @@ public class AuthControllerTest {
     @Autowired
     private UserJpaRepository userJpaRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @BeforeEach
     void setUp() {
-        User mockUser = new User(null, "testEmail", "testId", "testPassword", Role.USER);
+        User mockUser = User.builder()
+                .id(null)
+                .email("testEmail")
+                .name("testName")
+                .password(passwordEncoder.encode("testPassword"))
+                .role(Role.USER)
+                .build();
+
         userJpaRepository.save(mockUser);
     }
 

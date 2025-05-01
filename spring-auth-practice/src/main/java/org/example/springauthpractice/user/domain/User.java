@@ -22,11 +22,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static User signup(UserSignupRequest request) {
+    public static User signup(String email, String name, String password) {
         return User.builder()
-                .email(request.email())
-                .name(request.name())
-                .password(request.password())
+                .email(email)
+                .name(name)
+                .password(password)
                 .role(Role.USER)
                 .build();
     }
