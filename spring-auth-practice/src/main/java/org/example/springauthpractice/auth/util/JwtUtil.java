@@ -43,14 +43,14 @@ public class JwtUtil {
                 .compact();
     }
 
-    public Long getEmail(String token) {
+    public Long getUserId(String token) {
         return Jwts.parserBuilder().setSigningKey(secretKey).build()
-                .parseClaimsJws(token).getBody().get("email", Long.class);
+                .parseClaimsJws(token).getBody().get("userId", Long.class);
     }
 
     public String getUsername(String token) {
         return Jwts.parserBuilder().setSigningKey(secretKey).build()
-                .parseClaimsJws(token).getBody().get("name", String.class);
+                .parseClaimsJws(token).getBody().get("email", String.class);
     }
 
     public String getRole(String token) {

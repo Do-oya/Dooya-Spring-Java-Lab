@@ -70,7 +70,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     private LoginUser getUser(String token) {
-        Long userId = jwtUtil.getEmail(token);
+        Long userId = jwtUtil.getUserId(token);
         String email = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 

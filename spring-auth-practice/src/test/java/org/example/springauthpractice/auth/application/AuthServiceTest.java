@@ -34,7 +34,7 @@ public class AuthServiceTest {
         UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);
         AuthService authService = new AuthServiceImpl(userRepository, jwtUtil);
 
-        LoginRequest request = new LoginRequest("testId", "testPassword");
+        LoginRequest request = new LoginRequest("testEmail", "testPassword");
 
         // when
         LoginResponse response = authService.login(request);

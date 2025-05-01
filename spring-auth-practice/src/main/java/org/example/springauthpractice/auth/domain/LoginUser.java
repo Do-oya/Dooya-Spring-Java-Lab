@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public record LoginUser(Long id, String name, String role) implements UserDetails {
+public record LoginUser(Long id, String email, String role) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -24,6 +24,6 @@ public record LoginUser(Long id, String name, String role) implements UserDetail
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 }

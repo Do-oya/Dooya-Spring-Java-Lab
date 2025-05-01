@@ -2,18 +2,21 @@ package org.example.springauthpractice.auth.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.example.springauthpractice.auth.application.OAuth2LoginSuccessHandlerFactory;
 import org.example.springauthpractice.auth.exception.CustomAccessDeniedHandler;
 import org.example.springauthpractice.auth.exception.CustomAuthenticationEntryPoint;
 import org.example.springauthpractice.auth.filter.JwtAuthFilter;
 import org.example.springauthpractice.auth.util.JwtUtil;
+import org.example.springauthpractice.user.application.OAuth2UserServiceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -23,12 +26,13 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity()
 @RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtUtil jwtUtil;
     private final ObjectMapper objectMapper;
+    private final OAuth2UserServiceFactory oAuth2UserServiceFactory;
+    private final OAuth2LoginSuccessHandlerFactory successHandlerFactory;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -62,6 +66,18 @@ public class SecurityConfig {
         http.exceptionHandling((exceptionHandling) -> exceptionHandling
                 .accessDeniedHandler(new CustomAccessDeniedHandler(objectMapper))
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint(objectMapper)));
+
+        // OAuth2 로그인 설정
+        http.oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(userInfo -> userInfo.userService(oAuth2UserServiceFactory::loadUser))
+                .successHandler((request, response, authentication) -> {
+                    OAuth2AuthenticationToken oAuth2Token = (OAuth2AuthenticationToken) authentication;
+                    String provider = oAuth2Token.getAuthorizedClientRegistrationId();
+
+                    AuthenticationSuccessHandler handler = successHandlerFactory.getHandler(provider);
+                    handler.onAuthenticationSuccess(request, response, authentication);
+                })
+        );
 
         return http.build();
     }
