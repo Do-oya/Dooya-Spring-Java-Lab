@@ -2,7 +2,6 @@ package org.example.springauthpractice.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.springauthpractice.user.application.UserSignupRequest;
 
 @Table(name = "users")
 @Entity
