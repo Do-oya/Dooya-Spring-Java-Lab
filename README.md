@@ -1,6 +1,7 @@
 # 🌱 Dooya's Spring & Java Lab
 
-Dooya의 Spring boot 및 Java 실험소
+학습하며 실험한 Spring Boot와 Java 관련 코드들을 모아놓은 공간입니다.
+각 프로젝트는 학습 목적에 맞게 정리되어 있으며, 다양한 주제의 실습 예제들을 포함하고 있습니다.
 
 ---
 
