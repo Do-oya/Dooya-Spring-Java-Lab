@@ -2,7 +2,6 @@ package org.example.springauthpractice.user.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
-import jakarta.transaction.Transactional;
 import org.example.springauthpractice.auth.util.JwtUtil;
 import org.example.springauthpractice.fixture.UserFixture;
 import org.example.springauthpractice.user.application.UserSignupRequest;
