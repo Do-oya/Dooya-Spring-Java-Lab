@@ -3,8 +3,6 @@ package org.example.springauthpractice.auth.presentation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.springauthpractice.auth.application.LoginRequest;
 import org.example.springauthpractice.fixture.UserFixture;
-import org.example.springauthpractice.user.domain.Role;
-import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
