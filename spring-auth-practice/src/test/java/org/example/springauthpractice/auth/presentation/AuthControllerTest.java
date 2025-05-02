@@ -2,6 +2,7 @@ package org.example.springauthpractice.auth.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.springauthpractice.auth.application.LoginRequest;
+import org.example.springauthpractice.fixture.UserFixture;
 import org.example.springauthpractice.user.domain.Role;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
@@ -40,15 +41,7 @@ public class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
-        User mockUser = User.builder()
-                .id(null)
-                .email("testEmail")
-                .name("testName")
-                .password(passwordEncoder.encode("testPassword"))
-                .role(Role.USER)
-                .build();
-
-        userJpaRepository.save(mockUser);
+        userJpaRepository.save(UserFixture.testUser(passwordEncoder));
     }
 
     @DisplayName("로그인 성공")
