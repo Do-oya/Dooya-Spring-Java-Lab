@@ -1,6 +1,6 @@
 # 🌱 Dooya's Spring & Java Lab
 
-Dooya의 Spring boot 및 Java 실험소
+학습하며 실험한 Spring Boot와 Java 관련 코드들을 모아놓은 공간입니다.
 
 ---
 
