@@ -4,15 +4,12 @@ import org.example.springauthpractice.auth.util.JwtUtil;
 import org.example.springauthpractice.user.domain.Role;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.domain.UserRepository;
-import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
-import org.example.springauthpractice.user.infrastructure.UserRepositoryImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
