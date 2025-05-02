@@ -1,16 +1,13 @@
 package org.example.springauthpractice.user.application;
 
-import org.example.springauthpractice.user.domain.Role;
 import org.example.springauthpractice.user.domain.User;
 import org.example.springauthpractice.user.domain.UserRepository;
-import org.example.springauthpractice.user.infrastructure.UserJpaRepository;
-import org.example.springauthpractice.user.infrastructure.UserRepositoryImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,28 +19,35 @@ import static org.mockito.Mockito.times;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
+    @InjectMocks
+    private UserServiceImpl userService;
+
     @Mock
-    private UserJpaRepository userJpaRepository;
+    private UserRepository userRepository;
 
-    @DisplayName("회원 성공 가입 테스트")
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @DisplayName("회원가입 성공 테스트")
     @Test
-    void signupTest() {
+    void signupTest_Success() {
         // given
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        UserRepository userRepository = new UserRepositoryImpl(userJpaRepository);
-        UserService userService = new UserServiceImpl(userRepository, passwordEncoder);
+        UserSignupRequest request = UserSignupRequest.builder()
+                .email("testEmail")
+                .name("testName")
+                .password("testPassword")
+                .build();
 
-        UserSignupRequest request = new UserSignupRequest("testEmail", "testId", "testPassword");
-        User mockUser = new User(1L, "testEmail", "testId", "testPassword", Role.USER);
-
-        given(userJpaRepository.save(any(User.class))).willReturn(mockUser);
+        given(passwordEncoder.encode(request.password())).willReturn("encodedPassword");
+        User testUser = User.signup(request.email(), request.name(), "encodedPassword");
+        given(userRepository.save(any(User.class))).willReturn(testUser);
 
         // when
         User user = userService.signupUser(request);
 
         // then
-        assertThat(user.getName()).isEqualTo("testId");
-        assertThat(user.getPassword()).isEqualTo("testPassword");
-        then(userJpaRepository).should(times(1)).save(any(User.class));
+        assertThat(user.getEmail()).isEqualTo("testEmail");
+        assertThat(user.getPassword()).isEqualTo("encodedPassword");
+        then(userRepository).should(times(1)).save(any(User.class));
     }
 }
